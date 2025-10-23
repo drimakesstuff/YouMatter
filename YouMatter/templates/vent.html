@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Mood Today</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: 'Press Start 2P', cursive;
+      background-color: brown;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wrapper {
+      width: 95%;
+      max-width: 800px;
+      padding: 2rem;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .screen {
+      background: #fff0f0;
+      border-radius: 10px;
+      padding: 2rem;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      color: #c86666;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #382b2b;
+    }
+
+    p.description {
+      font-size: 12px;
+      margin-bottom: 20px;
+      color: #c86666;
+    }
+
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      grid-template-rows: repeat(2, auto);   /* 2 rows */
+      gap: 16px;
+    }
+
+    .mood-option {
+      background-color: #ffe4ec;
+      border: 2px solid #b17e7e;
+      border-radius: 8px;
+      padding: 12px 0;
+      font-size: 10px;
+      font-weight: bold;
+      color: #c86666;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+      min-height: 100px;
+    }
+
+    .mood-option span {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .mood-option:hover {
+      background-color: #ffb6c1;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      h1 { font-size: 18px; }
+      p.description { font-size: 10px; }
+      .mood-option { font-size: 8px; min-height: 80px; }
+      .mood-option span { font-size: 20px; }
+    }
+
+    @media (max-width: 400px) {
+      h1 { font-size: 14px; }
+      p.description { font-size: 8px; }
+      .mood-option { font-size: 7px; min-height: 70px; }
+      .mood-option span { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="screen">
+      <h1>How are you feeling today?</h1>
+      <p class="description">Recognizing your emotions is the first step toward better mental well-being.</p>
+      <div class="mood-grid">
+        <a href="/happy" class="mood-option"><span>😊</span>Happy</a>
+        <a href="/sad" class="mood-option"><span>😢</span>Sad</a>
+        <a href="/anxious" class="mood-option"><span>😟</span>Anxious</a>
+        <a href="/calm" class="mood-option"><span>😌</span>Calm</a>
+        <a href="/angry" class="mood-option"><span>😡</span>Angry</a>
+        <a href="/tired" class="mood-option"><span>😴</span>Tired</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

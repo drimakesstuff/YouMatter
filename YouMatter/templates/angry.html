@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vent Angry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    .screen {
+      position: absolute;
+      top: 12%;
+      left: 20%;
+      width: 60%;
+      height: 80%;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      border: 3px solid #b17e7e;
+      border-radius: 15px;
+      background-color: #ffe4ec;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 18px;
+      color: #5a4a3e;
+      padding: 15px;
+      resize: none;
+    }
+
+    @media (max-width: 768px) {
+      .screen {
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: 50%;
+      }
+      textarea {
+        font-size: 14px;
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .screen {
+        top: 8%;
+        left: 5%;
+        width: 90%;
+        height: 45%;
+      }
+      textarea {
+        font-size: 12px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body style="background-color: brown; color: white;">
+  <div class="wrapper">
+    <div class="screen">
+      <textarea placeholder="Feeling angry? Let it out here... then press enter"></textarea>
+    </div>
+  </div>
+  <script>
+    const textarea = document.querySelector("textarea");
+    textarea.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        textarea.value = ""; // Clear the textarea
+        setTimeout(() => {
+          window.location.href = "/afterangry"; // Go to next page
+        });
+      }
+    });
+  </script>
+</body>
+</html>

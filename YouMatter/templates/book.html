@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Counseling Slot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Press Start 2P', cursive;
+      color: #5a4a3e;
+    }
+
+    .screen {
+      position: absolute;
+      top: 5%;
+      left: 23.4%;
+      width: 52%;
+      height: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: #ffe4ec;
+      border-radius: 12px;
+      border: 3px solid #b17e7e;
+    }
+
+    label {
+      align-self: flex-start;
+      font-size: 12px;
+      margin-left: 5%;
+      color: #a97c7c;
+    }
+
+    input, select, button {
+      width: 90%;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 16px;
+      padding: 12px;
+      margin: 0 auto;
+      border-radius: 8px;
+      border: 2px solid #a97c7c;
+      color: #5a4a3e;
+    }
+
+    input::placeholder {
+      color: #a97c7c;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #c86666;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    button:disabled {
+      background-color: #d9a7a7;
+      cursor: not-allowed;
+    }
+
+    .message {
+      font-size: 14px;
+      color: #bc7b7b;
+      margin-top: 10px;
+      min-height: 24px;
+    }
+    
+    a.back-button {
+      display: inline-block;
+      margin-top: 0.1px;
+      font-size: px;
+      color: #fff;
+      background-color: #5d2626;
+      padding: 20px 15px;
+      text-decoration: none;
+      border-radius: 6px;
+      border: 2px solid #a55353;
+      transition: background-color 0.2s ease;
+      text-align: center;
+    }
+
+    a.back-button:hover {
+      background-color: #a55353;
+    }
+
+    a.back-button:focus {
+      outline: 3px solid #c86666;
+      outline-offset: 2px;
+    }
+    @media (max-width: 768px) {
+      .screen {
+        left: 10%;
+        width: 80%;
+      }
+      input, select, button {
+        font-size: 14px;
+        padding: 10px;
+      }
+      label {
+        font-size: 10px;
+      }
+      a.back-button {
+        font-size: 9px;
+        padding: 6px 8px;
+      }
+      
+    }
+
+    @media (max-width: 400px) {
+      .screen {
+        left: 5%;
+        width: 90%;
+      }
+      input, select, button {
+        font-size: 12px;
+        padding: 8px;
+      }
+      label {
+        font-size: 9px;
+      }
+      a.back-button {
+        font-size: 8px;
+        padding: 5px 6px;
+      }
+    }
+  </style>
+</head>
+<body style="background-color: brown;">
+
+  <div class="wrapper">
+    <div class="screen">
+      <label for="date">Select Date</label>
+      <input type="date" id="date" />
+
+      <label for="time">Select Time Slot</label>
+      <select id="time" disabled>
+        <option>Select a date first</option>
+      </select>
+
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Full Name" />
+
+      <label for="student_id">Student ID</label>
+      <input type="text" id="student_id" placeholder="Student ID" />
+
+      <label for="class_year">Class Year</label>
+      <select id="class_year">
+        <option value="">Select Year</option>
+        <option value="1st Year">1st Year</option>
+        <option value="2nd Year">2nd Year</option>
+        <option value="3rd Year">3rd Year</option>
+        <option value="4th Year">4th Year</option>
+        <option value="PG">Postgraduate</option>
+      </select>
+
+      <button id="bookBtn" onclick="submitBooking()" disabled>Book Slot</button>
+      <div class="message" id="message"></div>
+      <a href="/youmatter" class="back-button">← Back</a>
+
+    </div>
+  </div>
+
+  <script>
+    const allowedSlots = ["10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM"];
+    const timeSelect = document.getElementById("time");
+    const bookBtn = document.getElementById("bookBtn");
+    const message = document.getElementById("message");
+    const dateInput = document.getElementById("date");
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const minDate = `${yyyy}-${mm}-${dd}`;
+    dateInput.setAttribute("min", minDate);
+    function validateForm() {
+      const date = dateInput.value;
+      const time = timeSelect.value;
+      const name = document.getElementById("name").value.trim();
+      const student_id = document.getElementById("student_id").value.trim();
+      const class_year = document.getElementById("class_year").value;
+      if(date && time && name && student_id && class_year && time !== "No slots left" && !timeSelect.disabled) {
+        bookBtn.disabled = false;
+      } else {
+        bookBtn.disabled = true;
+      }
+    }
+
+    dateInput.addEventListener("change", async () => {
+      const date = dateInput.value;
+      if(!date) {
+        timeSelect.innerHTML = '<option>Select a date first</option>';
+        timeSelect.disabled = true;
+        message.textContent = "";
+        validateForm();
+        return;
+      }
+
+      const selectedDay = new Date(date).getDay();
+
+      if (selectedDay !== 2 && selectedDay !== 3) {
+        message.textContent = "Counselor available only on Tue & Wed.";
+        timeSelect.innerHTML = "";
+        timeSelect.disabled = true;
+        validateForm();
+        return;
+      }
+
+      message.textContent = "";
+      timeSelect.disabled = true;
+      timeSelect.innerHTML = '<option>Loading slots...</option>';
+
+      try {
+        const res = await fetch("/get_slots");
+        const data = await res.json();
+        const booked = data[date] || [];
+
+        timeSelect.innerHTML = "";
+        allowedSlots.forEach(slot => {
+          if (!booked.includes(slot)) {
+            const opt = document.createElement("option");
+            opt.value = slot;
+            opt.text = slot;
+            timeSelect.appendChild(opt);
+          }
+        });
+
+        if (timeSelect.options.length === 0) {
+          const opt = document.createElement("option");
+          opt.text = "No slots left";
+          opt.disabled = true;
+          timeSelect.appendChild(opt);
+          timeSelect.disabled = true;
+        } else {
+          timeSelect.disabled = false;
+        }
+      } catch (e) {
+        message.textContent = "Error loading slots. Please try again later.";
+        timeSelect.innerHTML = '<option>Error loading slots</option>';
+        timeSelect.disabled = true;
+      }
+      validateForm();
+    });
+
+    timeSelect.addEventListener("change", validateForm);
+    document.getElementById("name").addEventListener("input", validateForm);
+    document.getElementById("student_id").addEventListener("input", validateForm);
+    document.getElementById("class_year").addEventListener("change", validateForm);
+
+    async function submitBooking() {
+      const date = dateInput.value;
+      const time = timeSelect.value;
+      const name = document.getElementById("name").value.trim();
+      const student_id = document.getElementById("student_id").value.trim();
+      const class_year = document.getElementById("class_year").value;
+
+      if (!date || !time || !name || !student_id || !class_year) {
+        message.textContent = "Please fill all fields.";
+        return;
+      }
+
+      bookBtn.disabled = true;
+      message.textContent = "Booking...";
+
+      try {
+        const res = await fetch('/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ date, time, name, student_id, class_year })
+        });
+        const result = await res.json();
+        message.textContent = result.message;
+
+        if (result.status === "success") {
+          dateInput.value = "";
+          document.getElementById("name").value = "";
+          document.getElementById("student_id").value = "";
+          document.getElementById("class_year").value = "";
+          timeSelect.innerHTML = '<option>Select a date first</option>';
+          timeSelect.disabled = true;
+          bookBtn.disabled = true;
+        } else {
+          bookBtn.disabled = false;
+        }
+      } catch(e) {
+        message.textContent = "Booking failed. Please try again.";
+        bookBtn.disabled = false;
+      }
+    }
+  </script>
+
+</body>
+</html>

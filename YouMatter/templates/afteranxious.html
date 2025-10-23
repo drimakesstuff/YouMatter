@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You Feel Better</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      width:100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Press Start 2P', cursive;
+    }
+
+    .screen {
+      position: absolute;
+      top: 20%;
+      left: 23.4%;
+      width: 52%;
+      height: 31.3%;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .screen h1 {
+      font-size: 48px;
+      color: #561717;
+      margin-bottom: 20px;
+    }
+
+    .screen p {
+      font-size: 36px;
+      color: #301518;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      font-size: 28px;
+      color: #fff;
+      background-color: #3b1414;
+      padding: 16px 28px;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 2px solid #a55353;
+      transition: background-color 0.2s ease;
+    }
+
+    .back-button:hover {
+      background-color: #a55353;
+    }
+
+    @media (max-width: 768px) {
+      .screen h1 {
+        font-size: 38px;
+      }
+      .screen p {
+        font-size: 28px;
+      }
+      .back-button {
+        font-size: 22px;
+        padding: 14px 22px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .screen h1 {
+        font-size: 28px;
+      }
+      .screen p {
+        font-size: 22px;
+      }
+      .back-button {
+        font-size: 18px;
+        padding: 12px 18px;
+      }
+    }
+  </style>
+</head>
+<body style="background-color: brown; color: white;">
+  <div class="wrapper">
+    <div class="screen">
+      <h1>You are less anxious now — YAYY 🎉</h1>
+      <p>Feel your shoulders drop. You're okay right now.</p>
+      <a href="/youmatter" class="back-button">← Back</a>
+    </div>
+  </div>
+</body>
+</html>

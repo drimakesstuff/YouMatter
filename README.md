@@ -47,4 +47,4 @@ The app will automatically create bookings.xlsx if it doesn’t exist.
 ---
 ## Author
 
-Dhriti – BSc Data Science student
+Dri – BSc Data Science student

@@ -45,6 +45,13 @@ Visit [http://127.0.0.1:5000](http://127.0.0.1:5000)
 The app will automatically create bookings.xlsx if it doesn’t exist.
 
 ---
+## ⚡About
+
+It’s a simple but solid Flask app that lets users book appointments without double-booking, saves everything to an Excel file, and also serves different emotion-based support pages. Basically a mini mental-health site with a built-in scheduler that keeps things organized and low-maintenance.
+
+
+---
+
 ## Author
 
 Dri – BSc Data Science student
